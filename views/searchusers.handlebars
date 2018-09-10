@@ -1,0 +1,15 @@
+<br>
+<h5>This is simple app which add users in REDIS which is a memory database</h5>
+<p>the list start from user001</p>
+<p>please check if the user exits or not and then add a user</p>
+<p>Thank You :)</p>
+
+<h1>Search User</h1>
+<form method="POST" action="/user/search">
+{{#if error}} <span>{{error}}</span> {{/if}}
+<div class="form-group">
+  <input type="text" name="id" class="form-control" placeholder="Search User By Id">
+</div>
+  <input type="submit" class="btn btn-primary" value="Search">
+
+</form>
