@@ -1,16 +1,23 @@
 let express = require("express");
 let bodyParser = require("body-parser");
 let exphbs = require('express-handlebars');
-let redis = require('redis');
 let path = require('path');
 let methodOverride = require("method-override");
 
 //create Redis Client
 
-let client =redis.createClient();
-client.on('connect',function(){
-    console.log('Conneted To Redis Succesfully');
-});
+if (process.env.REDISTOGO_URL) {
+    var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+    var redis = require("redis").createClient(rtg.port, rtg.hostname);
+
+redis.auth(rtg.auth.split(":")[1]);
+} else {
+   var redis = require("redis").createClient();
+   console.log('Conneted To Redis Succesfully');
+}
+
+
+
 
 //set port 
 const port = 4200;
