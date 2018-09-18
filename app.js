@@ -20,7 +20,7 @@ redis.auth(rtg.auth.split(":")[1]);
 
 
 //set port 
-const port = 4200;
+const port = process.env.PORT||4000;
 //init app
 let app = express();
 
