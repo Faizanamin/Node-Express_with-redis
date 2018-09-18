@@ -42,7 +42,7 @@ app.get('/',function(req,res){
 // search route
 app.post('/user/search',function(req,res,next){
     let id = req.body.id;
-    client.hgetall(id,function(err,obj){
+    redis.hgetall(id,function(err,obj){
         if(!obj){
             res.render('searchusers',{
                 error:'User Dose Not Exist'
@@ -68,7 +68,7 @@ app.post('/user/add',function(req,res){
     let last_name = req.body.last_name;
     let email = req.body.email;
     let phone = req.body.phone;
-    client.HMSET(id,[
+    redis.HMSET(id,[
         'first_name',first_name,
         'last_name',last_name,
         'email',email,
@@ -84,7 +84,7 @@ app.post('/user/add',function(req,res){
 });
 //Delete A user
 app.delete('/user/delete/:id',function(req,res){
-client.del(req.params.id);
+redis.del(req.params.id);
 res.redirect('/')
 });
 //Run server
